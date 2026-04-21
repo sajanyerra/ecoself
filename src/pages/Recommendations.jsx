@@ -120,57 +120,40 @@ export default function Recommendations() {
   }, [])
 
   async function fetchRecommendations(answers, scores) {
-    try {
-      setLoading(true)
-      setError(null)
+  try {
+    setLoading(true)
+    setError(null)
 
-      const apiKey = import.meta.env.VITE_GROQ_API_KEY
-      const prompt = buildPrompt(answers, scores)
+    const prompt = buildPrompt(answers, scores)
 
-      const response = await fetch(
-        'https://api.groq.com/openai/v1/chat/completions',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${apiKey}`
-          },
-          body: JSON.stringify({
-            model: 'llama-3.3-70b-versatile',
-            messages: [
-              {
-                role: 'user',
-                content: prompt
-              }
-            ],
-            temperature: 0.7,
-            max_tokens: 2048,
-          })
-        }
-      )
+    const response = await fetch('/api/recommend', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt })
+    })
 
-      if (!response.ok) {
-        const errData = await response.json()
-        console.error('Groq error:', errData)
-        throw new Error('API request failed')
-      }
-
-      const data = await response.json()
-      const text = data.choices[0].message.content
-
-      const jsonMatch = text.match(/\{[\s\S]*\}/)
-      if (!jsonMatch) throw new Error('Invalid response format')
-
-      const parsed = JSON.parse(jsonMatch[0])
-      setRecommendations(parsed.recommendations || [])
-
-    } catch (err) {
-      console.error('Full error:', err)
-      setError('Something went wrong fetching your recommendations. Please try again.')
-    } finally {
-      setLoading(false)
+    if (!response.ok) {
+      const errData = await response.json()
+      console.error('API error:', errData)
+      throw new Error('API request failed')
     }
+
+    const data = await response.json()
+    const text = data.choices[0].message.content
+
+    const jsonMatch = text.match(/\{[\s\S]*\}/)
+    if (!jsonMatch) throw new Error('Invalid response format')
+
+    const parsed = JSON.parse(jsonMatch[0])
+    setRecommendations(parsed.recommendations || [])
+
+  } catch (err) {
+    console.error('Full error:', err)
+    setError('Something went wrong fetching your recommendations. Please try again.')
+  } finally {
+    setLoading(false)
   }
+}
 
   function toggleGoal(rec) {
     const exists = savedGoals.find(g => g.title === rec.title)

@@ -314,14 +314,32 @@ export default function Landing() {
       {/* Footer */}
       <footer className="py-8 text-center text-gray-400 text-sm">
   <p>🌱 EcoSelf · Built with 💚 in Ireland · Your data stays with you</p>
-  <p className="mt-2">
+  <div className="flex items-center justify-center gap-4 mt-3">
     <a
       href="/privacy"
       className="text-forest-500 hover:text-forest-600 transition-colors"
     >
       Privacy Policy
     </a>
-  </p>
+    <span>·</span>
+    <a
+      href="https://www.linkedin.com/in/sajanyerra"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-forest-500 hover:text-forest-600 transition-colors"
+    >
+      LinkedIn
+    </a>
+    <span>·</span>
+    <a
+      href="https://github.com/sajanyerra"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-forest-500 hover:text-forest-600 transition-colors"
+    >
+      GitHub
+    </a>
+  </div>
 </footer>
 
     </div>

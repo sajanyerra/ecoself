@@ -175,7 +175,8 @@ export default function SDGs() {
         <div className="space-y-3">
           {sdgs.map((sdg, i) => {
             const isExpanded = expanded === sdg.id
-            const isRelevant = sdg.relevantTo.length > 0
+            const hasScores = Object.keys(scores).length > 0
+const isRelevant = hasScores && sdg.relevantTo.length > 0
 
             return (
               <motion.div
