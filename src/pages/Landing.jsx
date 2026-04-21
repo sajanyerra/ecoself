@@ -38,7 +38,7 @@ const features = [
 
 const stats = [
   { value: '3 min', label: 'to complete' },
-  { value: '18', label: 'smart questions' },
+  { value: '~20', label: 'smart questions' },
   { value: '100%', label: 'private' },
 ]
 
@@ -153,31 +153,108 @@ export default function Landing() {
       </section>
 
       {/* Features */}
-      <section className="bg-white py-20">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="section-title">Everything you need to go greener</h2>
-            <p className="section-sub">Practical, personal and rooted in Irish context</p>
-          </div>
+      {/* Features */}
+<section className="bg-white py-20">
+  <div className="max-w-6xl mx-auto px-6">
+    <div className="text-center mb-12">
+      <h2 className="section-title">Everything you need to go greener</h2>
+      <p className="section-sub">Practical, personal and rooted in Irish context</p>
+    </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {features.map((f, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.1 }}
-                className="card hover:shadow-glow transition-shadow duration-300"
-              >
-                <div className="text-3xl mb-3">{f.icon}</div>
-                <h3 className="font-display font-bold text-gray-900 mb-2">{f.title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{f.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {features.map((f, i) => (
+        <motion.div
+          key={i}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: i * 0.1 }}
+          className="card hover:shadow-glow transition-shadow duration-300"
+        >
+          <div className="text-3xl mb-3">{f.icon}</div>
+          <h3 className="font-display font-bold text-gray-900 mb-2">{f.title}</h3>
+          <p className="text-gray-500 text-sm leading-relaxed">{f.desc}</p>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
+
+{/* Explore Section */}
+<section className="py-20 max-w-6xl mx-auto px-6">
+  <div className="text-center mb-12">
+    <h2 className="section-title">Explore EcoSelf</h2>
+    <p className="section-sub">No quiz needed — dive straight in</p>
+  </div>
+
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.4, delay: 0.1 }}
+      onClick={() => navigate('/ireland')}
+      className="card hover:shadow-glow transition-all duration-300 
+        cursor-pointer hover:-translate-y-1 text-center"
+    >
+      <div className="text-4xl mb-4">🇮🇪</div>
+      <h3 className="font-display font-bold text-gray-900 mb-2">
+        Ireland's Sustainability
+      </h3>
+      <p className="text-gray-500 text-sm leading-relaxed mb-4">
+        See where Ireland stands on emissions, energy, 
+        transport and waste — the good and the urgent.
+      </p>
+      <span className="text-forest-600 text-sm font-semibold">
+        Explore Stats →
+      </span>
+    </motion.div>
+
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.4, delay: 0.2 }}
+      onClick={() => navigate('/sdgs')}
+      className="card hover:shadow-glow transition-all duration-300 
+        cursor-pointer hover:-translate-y-1 text-center"
+    >
+      <div className="text-4xl mb-4">🌐</div>
+      <h3 className="font-display font-bold text-gray-900 mb-2">
+        The 17 Global Goals
+      </h3>
+      <p className="text-gray-500 text-sm leading-relaxed mb-4">
+        Explore the UN Sustainable Development Goals 
+        and how your lifestyle connects to each one.
+      </p>
+      <span className="text-forest-600 text-sm font-semibold">
+        Explore SDGs →
+      </span>
+    </motion.div>
+
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.4, delay: 0.3 }}
+      onClick={() => navigate('/resources')}
+      className="card hover:shadow-glow transition-all duration-300 
+        cursor-pointer hover:-translate-y-1 text-center"
+    >
+      <div className="text-4xl mb-4">📚</div>
+      <h3 className="font-display font-bold text-gray-900 mb-2">
+        Irish Resources & Grants
+      </h3>
+      <p className="text-gray-500 text-sm leading-relaxed mb-4">
+        SEAI grants, transport schemes, food resources 
+        and more — all verified Irish sources.
+      </p>
+      <span className="text-forest-600 text-sm font-semibold">
+        Explore Resources →
+      </span>
+    </motion.div>
+  </div>
+</section>
 
       {/* Privacy Section */}
       <section className="max-w-4xl mx-auto px-6 py-20 text-center">
