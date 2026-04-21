@@ -1,0 +1,270 @@
+# EcoSelf — Project Handover Document v3
+## For continuing in a new chat
+
+### HOW TO USE THIS DOCUMENT
+Paste this entire document at the start of a new chat and say:
+"I am continuing building my EcoSelf web app.
+Here is my project handover document.
+Please continue from where we left off."
+
+### PROJECT OVERVIEW
+A React web app for personalised sustainability recommendations
+tailored to life in Ireland. Portfolio project.
+Minimalist, fun, nature-themed design.
+Privacy-first — all data stored in localStorage only.
+No backend, no accounts, no data collection.
+
+### TECH STACK
+- React + Vite
+- Tailwind CSS v3
+- Framer Motion (animations)
+- Recharts (installed, not used yet)
+- React Router DOM (routing)
+- Groq API — llama-3.3-70b-versatile (AI recommendations)
+- html2canvas (score card download)
+- localStorage (all user data)
+
+### PROJECT LOCATION
+D:\Projects\ecoself
+
+### KEY COMMANDS
+```bash
+D:
+cd Projects\ecoself
+npm run dev
+# App runs at http://localhost:5173
+```
+
+### ENVIRONMENT
+- Windows
+- Node v20.x updated
+- .env file in root with VITE_GROQ_API_KEY
+- postcss.config.cjs (renamed due to ES module issue)
+- vite.config.js points to postcss.config.cjs
+
+### COMPLETE FILE STRUCTURE
+```
+D:\Projects\ecoself\
+  src\
+    pages\
+      Landing.jsx         ✅ Complete
+      Quiz.jsx            ✅ Complete
+      Results.jsx         ✅ Complete
+      Recommendations.jsx ✅ Complete
+      Goals.jsx           ✅ Complete
+      Ireland.jsx         ✅ Complete
+      SDGs.jsx            ✅ Complete
+      Resources.jsx       ✅ Complete
+      Privacy.jsx         🔲 Not built yet
+    data\
+      questions.js        ✅ Complete
+    utils\
+      scoring.js          ✅ Complete
+    components\
+      Navbar.jsx          ✅ Complete
+    App.jsx               ✅ Complete (8 routes)
+    main.jsx              ✅ Complete
+    index.css             ✅ Complete
+  tailwind.config.js      ✅ Complete
+  postcss.config.cjs      ✅ Complete
+  vite.config.js          ✅ Complete
+  .env                    ✅ Complete (VITE_GROQ_API_KEY)
+  .gitignore              ✅ Complete
+```
+
+### ALL ROUTES
+```
+/                → Landing page
+/quiz            → Quiz
+/results         → EcoScore dashboard
+/recommendations → AI recommendations
+/goals           → Goal tracker
+/ireland         → Ireland stats hub
+/sdgs            → SDG explorer
+/resources       → Resources library
+/privacy         → Privacy page (not built yet)
+```
+
+### DESIGN SYSTEM
+```
+Colors:
+  forest-50:  #f0faf4
+  forest-100: #dcf5e7
+  forest-400: #52b788
+  forest-500: #2d9e6b (primary green)
+  forest-600: #1e7f54
+  forest-700: #196643
+  sun-300:    #ffe08a
+  sun-400:    #ffd166 (accent yellow)
+  sun-500:    #ffc233
+  background: #f8faf9
+
+Fonts:
+  Display: Plus Jakarta Sans (headers)
+  Body: Inter
+
+Custom classes (index.css):
+  .btn-primary
+  .btn-secondary
+  .card
+  .quiz-option
+  .section-title
+  .section-sub
+```
+
+### SCORING SYSTEM
+```
+Categories + weights:
+  transport: 25%
+  diet:      25%
+  home:      25%
+  shopping:  15%
+  water:     10%
+
+Ireland averages (EPA/CSO/SEAI):
+  transport: 48
+  diet:      52
+  home:      41
+  shopping:  55
+  water:     58
+  overall:   51
+
+Score labels:
+  85+  → Eco Champion 🏆
+  70+  → Green Explorer 🌿
+  55+  → Conscious Starter 🌱
+  40+  → Aware & Growing 🌍
+  <40  → Room to Grow 🌾
+```
+
+### QUIZ STRUCTURE
+```
+20 questions across 5 categories:
+  Transport: T0, T1, T2, T3a, T3b, T4
+  Diet:      D1, D2, D3, D4
+  Home:      H1, H2, H3, H4, H5
+  Shopping:  S1, S2, S3
+  Water:     W1, W2, W3, W4
+
+Types: single, multi, hasOther
+Branching:
+  T2 shows only if T1 includes 'car'
+  T4 shows only if T0 !== 'at-home'
+```
+
+### LOCALSTORAGE KEYS
+```
+ecoself_answers  → quiz answers
+ecoself_scores   → calculated scores
+ecoself_goals    → saved goals array
+ecoself_name     → user first name (for score card)
+```
+
+### GROQ API
+```
+Model: llama-3.3-70b-versatile
+Endpoint: https://api.groq.com/openai/v1/chat/completions
+Auth: Bearer token in Authorization header
+Free tier: 30 requests/minute
+Works in EU/Ireland ✅
+```
+
+### NAVBAR BEHAVIOUR
+```
+Shared Navbar component used on all pages except Quiz.
+Always visible:
+  🇮🇪 Ireland Stats (/ireland)
+  🌐 SDGs (/sdgs)
+  📚 Resources (/resources)
+
+Only after quiz completed:
+  📊 My Score (/results)
+  🤖 Recommendations (/recommendations)
+  🎯 My Goals (/goals)
+
+CTA button:
+  No quiz → "Start Quiz →"
+  Quiz done → "Retake Quiz"
+
+Mobile: hamburger menu
+Desktop: horizontal links
+```
+
+### AI RECOMMENDATIONS
+```
+Model: llama-3.3-70b-versatile via Groq
+Prompt asks for:
+  - title
+  - why
+  - action
+  - irishResource (text)
+  - irishResourceUrl (homepage URL only)
+  - sdgs (array of numbers)
+  - difficulty (Easy / Medium / Big change)
+```
+
+### SCORE CARD
+```
+Downloaded as PNG via html2canvas
+Shows:
+  - User first name (asked on first download)
+  - Score number
+  - Score label
+  - Category breakdown bars
+  - EcoSelf branding
+Name stored in localStorage as ecoself_name
+```
+
+### RESOURCES PAGE
+```
+Layout: 3 columns top, 2 columns bottom
+Categories:
+  1. Home Energy Grants
+  2. Transport
+  3. Food & Diet
+  4. Shopping & Waste
+  5. Learn & Get Involved
+```
+
+### WHAT STILL NEEDS TO BE BUILT
+```
+1. Privacy Page (/privacy) ← NEXT
+   - What data is stored locally
+   - What is sent to Groq API
+   - No personal data collected
+   - Link in footer of Landing page
+
+2. GitHub Setup
+   - Create repository
+   - Push all code
+   - .env must NOT be pushed
+   - Write README with screenshots
+
+3. Deploy to Vercel
+   - Free hosting
+   - Add VITE_GROQ_API_KEY as env variable
+   - Get live URL
+   - Update share text URL from localhost
+
+4. App Naming
+   - EcoSelf is placeholder
+   - Decide final name before launch
+
+5. LinkedIn Post Strategy
+   - Screenshot of score card
+   - Link to live app
+   - Post copy suggestions
+```
+
+### IMPORTANT NOTES
+```
+- User is not experienced with coding
+  go step by step, one file at a time
+- Check in after every step
+- Read ALL errors fully before responding
+- User is based in Ireland
+- Privacy is core feature
+- Design: minimalist, fun, nature-themed
+- Do not use too many words unnecessarily
+- User's name is Sajan
+```

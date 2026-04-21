@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8faf9;
+    color: #1b1b1b;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-forest-500 hover:bg-forest-600 text-white font-semibold px-6 py-3 rounded-2xl transition-all duration-200 shadow-soft hover:shadow-glow hover:-translate-y-0.5 active:translate-y-0;
+  }
+
+  .btn-secondary {
+    @apply bg-white hover:bg-forest-50 text-forest-700 font-semibold px-6 py-3 rounded-2xl border-2 border-forest-200 hover:border-forest-400 transition-all duration-200;
+  }
+
+  .card {
+    @apply bg-white rounded-3xl shadow-card p-6;
+  }
+
+  .quiz-option {
+    @apply flex flex-col items-center justify-center gap-2 p-4 rounded-2xl border-2 border-gray-100 hover:border-forest-300 hover:bg-forest-50 cursor-pointer transition-all duration-200 text-center;
+  }
+
+  .quiz-option.selected {
+    @apply border-forest-500 bg-forest-50 shadow-soft;
+  }
+
+  .section-title {
+    @apply text-3xl font-display font-bold text-gray-900;
+  }
+
+  .section-sub {
+    @apply text-gray-500 text-lg mt-2;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f0faf4;
+}
+::-webkit-scrollbar-thumb {
+  background: #52b788;
+  border-radius: 10px;
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
