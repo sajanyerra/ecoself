@@ -151,35 +151,6 @@ export default function Landing() {
           </motion.div>
         </motion.div>
       </section>
-
-      {/* Features */}
-      {/* Features */}
-<section className="bg-white py-20">
-  <div className="max-w-6xl mx-auto px-6">
-    <div className="text-center mb-12">
-      <h2 className="section-title">Everything you need to go greener</h2>
-      <p className="section-sub">Practical, personal and rooted in Irish context</p>
-    </div>
-
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {features.map((f, i) => (
-        <motion.div
-          key={i}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: i * 0.1 }}
-          className="card hover:shadow-glow transition-shadow duration-300"
-        >
-          <div className="text-3xl mb-3">{f.icon}</div>
-          <h3 className="font-display font-bold text-gray-900 mb-2">{f.title}</h3>
-          <p className="text-gray-500 text-sm leading-relaxed">{f.desc}</p>
-        </motion.div>
-      ))}
-    </div>
-  </div>
-</section>
-
 {/* Explore Section */}
 <section className="py-20 max-w-6xl mx-auto px-6">
   <div className="text-center mb-12">
@@ -253,6 +224,33 @@ export default function Landing() {
         Explore Resources →
       </span>
     </motion.div>
+  </div>
+</section>
+      {/* Features */}
+      {/* Features */}
+<section className="bg-white py-20">
+  <div className="max-w-6xl mx-auto px-6">
+    <div className="text-center mb-12">
+      <h2 className="section-title">Everything you need to go greener</h2>
+      <p className="section-sub">Practical, personal and rooted in Irish context</p>
+    </div>
+
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {features.map((f, i) => (
+        <motion.div
+          key={i}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: i * 0.1 }}
+          className="card hover:shadow-glow transition-shadow duration-300"
+        >
+          <div className="text-3xl mb-3">{f.icon}</div>
+          <h3 className="font-display font-bold text-gray-900 mb-2">{f.title}</h3>
+          <p className="text-gray-500 text-sm leading-relaxed">{f.desc}</p>
+        </motion.div>
+      ))}
+    </div>
   </div>
 </section>
 
