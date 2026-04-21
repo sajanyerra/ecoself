@@ -87,7 +87,7 @@ const [showNameInput, setShowNameInput] = useState(false)
   }, [])
 
   function handleShare() {
-    const text = `🌱 I just got my EcoScore on EcoSelf: ${scores.overall}/100 — ${getScoreLabel(scores.overall).label}! How sustainable is your life? Find out here → localhost:5173`
+    const text = `🌱 I just got my EcoScore on EcoSelf: ${scores.overall}/100 — ${getScoreLabel(scores.overall).label}! How sustainable is your life? Find out here → https://ecoself.vercel.app`
     navigator.clipboard.writeText(text)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
@@ -283,8 +283,8 @@ const [showNameInput, setShowNameInput] = useState(false)
               })}
             </div>
             <p className="text-forest-200 text-xs">
-              ecoself.ie · How sustainable is your life?
-            </p>
+  ecoself.vercel.app · How sustainable is your life?
+</p>
           </div>
         </motion.div>
 
