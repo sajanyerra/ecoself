@@ -17,7 +17,7 @@ const resources = [
       {
         title: 'National Home Retrofit Scheme',
         desc: 'One-stop-shop for homeowners to retrofit their home with government support.',
-        url: 'https://www.seai.ie/grants/home-energy-grants/national-home-energy-upgrade-scheme',
+        url: 'https://www.seai.ie/grants/home-energy-grants',
         tag: 'Grant',
       },
       {
@@ -29,7 +29,7 @@ const resources = [
       {
         title: 'Warmer Homes Scheme',
         desc: 'Free energy upgrades for homeowners on low incomes.',
-        url: 'https://www.seai.ie/grants/home-energy-grants/better-energy-warmer-homes-scheme',
+        url: 'https://www.seai.ie/grants/home-energy-grants',
         tag: 'Free Scheme',
       },
     ],
