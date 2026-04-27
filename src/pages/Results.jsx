@@ -86,12 +86,52 @@ const [showNameInput, setShowNameInput] = useState(false)
     if (savedName) setUserName(savedName)
   }, [])
 
-  function handleShare() {
-    const text = `🌱 I just got my EcoScore on EcoSelf: ${scores.overall}/100 — ${getScoreLabel(scores.overall).label}! How sustainable is your life? Find out here → https://ecoself.vercel.app`
-    navigator.clipboard.writeText(text)
+  async function handleShare() {
+  const shareText = `🌱 I just scored ${scores.overall}/100 on EcoSelf — ${getScoreLabel(scores.overall).label}!\n\nHow sustainable is your lifestyle? Find out at ecoself.vercel.app`
+
+  try {
+    // Generate image from score card
+    const canvas = await html2canvas(shareCardRef.current, {
+      scale: 2,
+      backgroundColor: null,
+    })
+
+    canvas.toBlob(async (blob) => {
+      const file = new File([blob], 'ecoself-score.png', { type: 'image/png' })
+
+      // Try native share (mobile + modern desktop)
+      if (navigator.share && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          title: 'My EcoSelf Score',
+          text: shareText,
+          files: [file],
+        })
+      } else if (navigator.share) {
+        // Share without file (some browsers)
+        await navigator.share({
+          title: 'My EcoSelf Score',
+          text: shareText,
+          url: 'https://ecoself.vercel.app',
+        })
+      } else {
+        // Desktop fallback — download image + copy text
+        const link = document.createElement('a')
+        link.download = 'ecoself-score.png'
+        link.href = canvas.toDataURL()
+        link.click()
+        await navigator.clipboard.writeText(shareText)
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
+      }
+    })
+  } catch (err) {
+    console.error('Share error:', err)
+    // Final fallback — just copy text
+    await navigator.clipboard.writeText(shareText)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
   }
+}
 
   async function handleDownload() {
     if (!shareCardRef.current) return
@@ -306,14 +346,14 @@ const [showNameInput, setShowNameInput] = useState(false)
           </motion.button>
 
           <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={handleShare}
-            className="btn-secondary w-full py-4 text-lg flex items-center justify-center gap-2"
-          >
-            <Share2 size={18} />
-            {copied ? '✅ Copied to clipboard!' : 'Copy Share Text'}
-          </motion.button>
+  whileHover={{ scale: 1.02 }}
+  whileTap={{ scale: 0.98 }}
+  onClick={handleShare}
+  className="btn-secondary w-full py-4 text-lg flex items-center justify-center gap-2"
+>
+  <Share2 size={18} />
+  {copied ? '✅ Copied to clipboard!' : 'Share My Score 🌱'}
+</motion.button>
 
           {showNameInput ? (
   <div className="flex gap-2">
